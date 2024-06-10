@@ -3,14 +3,19 @@ import React from "react";
 import { setStatusBarStyle } from "expo-status-bar";
 import { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { router } from "expo-router";
+import { Redirect, router } from "expo-router";
 
 import images from "../constants/images";
 import CustomButton from "../components/CustomButton";
+import { useGlobalContext } from "../context/GlobalProvider";
 
 const Welcome = () => {
+  const { isLoading, isLoggedIn } = useGlobalContext();
+
+  if (!isLoading && isLoggedIn) return <Redirect href="/home" />;
+
   useEffect(() => {
-    setStatusBarStyle("light");
+    setStatusBarStyle("auto");
   });
 
   return (
