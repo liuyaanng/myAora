@@ -15,7 +15,7 @@ const Welcome = () => {
   if (!isLoading && isLoggedIn) return <Redirect href="/home" />;
 
   useEffect(() => {
-    setStatusBarStyle("auto");
+    setStatusBarStyle("light");
   });
 
   return (
