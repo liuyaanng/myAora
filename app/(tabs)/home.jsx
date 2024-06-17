@@ -1,13 +1,13 @@
-import { SafeAreaView } from "react-native-safe-area-context";
-import { FlatList, Text, View, Image, RefreshControl } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
+import { FlatList, Image, RefreshControl, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-import { images } from "../../constants";
 import EmptyState from "../../components/EmptyState";
-import VideoCard from "../../components/VideoCard";
 import SearchInput from "../../components/SearchInput";
 import Trending from "../../components/Trending";
+import VideoCard from "../../components/VideoCard";
+import { images } from "../../constants";
 import { getAllPosts, getLatestPosts } from "../../lib/appwrite";
 import useAppwrite from "../../lib/useAppwrite";
 
@@ -17,8 +17,6 @@ const Home = () => {
   const [refreshing, setRefreshing] = useState(false);
   const { data: posts, refetch } = useAppwrite(getAllPosts);
   const { data: latestPosts } = useAppwrite(getLatestPosts);
-  console.log(posts);
-
   const onRefresh = async () => {
     setRefreshing(true);
     await refetch();
