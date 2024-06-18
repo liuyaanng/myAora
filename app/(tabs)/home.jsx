@@ -10,13 +10,15 @@ import VideoCard from "../../components/VideoCard";
 import { images } from "../../constants";
 import { getAllPosts, getLatestPosts } from "../../lib/appwrite";
 import useAppwrite from "../../lib/useAppwrite";
-
-const data = [];
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Home = () => {
   const [refreshing, setRefreshing] = useState(false);
   const { data: posts, refetch } = useAppwrite(getAllPosts);
   const { data: latestPosts } = useAppwrite(getLatestPosts);
+
+  const { user } = useGlobalContext();
+
   const onRefresh = async () => {
     setRefreshing(true);
     await refetch();
@@ -34,8 +36,8 @@ const Home = () => {
             video={item.video}
             prompt={item.prompt}
             thumbnail={item.thumbnail}
-            creator={item.creator.username}
-            avatar={item.creator.avatar}
+            creator={item?.creator?.username}
+            avatar={item?.creator?.avatar}
           />
         )}
         ListEmptyComponent={() => (
@@ -50,10 +52,10 @@ const Home = () => {
             <View className="mb-6 flex flex-row items-start justify-between">
               <View>
                 <Text className="font-pmedium text-sm text-gray-100">
-                  Welcome Back
+                  Welcome Back,
                 </Text>
                 <Text className="font-psemibold text-2xl text-white">
-                  GeekOcean
+                  {user?.username}
                 </Text>
               </View>
 
