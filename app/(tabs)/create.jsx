@@ -20,7 +20,6 @@ import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Create = () => {
   const { user } = useGlobalContext();
-  console.log("user", user);
   const [uploading, setUploading] = useState(false);
   const [videoContent, setVideoContent] = useState({
     title: "",
